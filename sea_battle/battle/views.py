@@ -5,16 +5,17 @@ from django.http import HttpResponse
 import battle.forms as forma
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate
 from django.contrib.auth import login as lin
+from django.contrib.auth import logout as lout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
 
+@login_required(redirect_field_name="gg", login_url="login")
 def index(request):
-    print(request.user.is_authenticated)
     context = {}
-    return HttpResponse("return this string")
+    return render(request, 'index.html', context)
 
 
 def login(request):
@@ -33,15 +34,23 @@ def login(request):
                     lin(request, user=user)
                 else:
                     context["errors"].append("LogInv")
-                    context["ec"] += 1
-                    print("None")
+                    return render(request, 'login.html', context)
                 return redirect('/')
             else:
+                context["errors"].append("LogInv")
                 print("No such user")
 
     else:
         context["form"] = forma.Login()
 
+    return render(request, 'login.html', context)
+
+
+def logout(request):
+    context = {}
+    lout(request)
+    # print(request.user.is_authenticated) #Проверка, зареган ли пользователь
+    context["form"] = forma.Login()
     return render(request, 'login.html', context)
 
 
@@ -53,19 +62,17 @@ def registration(request):
         if f.is_valid():
             log = f.data["login"]
             context["errors"] = []
-            context["ec"] = 0
             pw = f.data["password"]
             pw_d = f.data["password_double"]
             if User.objects.filter(username=log).exists():
-                print("User already exist")
+                context["errors"].append("Exists")
             else:
                 if pw == pw_d:
                     user = User.objects.create_user(username=log, password=pw)
                     user.save()
-                    print("Ok")
                     return redirect('/')
                 else:
-                    print("first pass != doubled pass")
+                    context["errors"].append("FD_pass")
 
     else:
         context["form"] = forma.Registration()

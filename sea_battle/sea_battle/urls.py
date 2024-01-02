@@ -20,7 +20,8 @@ from battle.views import *
 
 urlpatterns = [
     path('', index),
-    path('login', login),
+    path('login', login, name="login"),
+    path('logout', logout),
     path('reg', registration),
 
 ]

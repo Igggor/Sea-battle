@@ -14,6 +14,11 @@
         <img class="logo" src="{% static 'imgs/sea.jpg' %}" alt="Логотип">
     </div>
     <h2>Регистрация</h2>
+    {% if 'Exists' in errors %}
+        <p class="error">Поьзователь с таким именем уже существует</p>
+    {% elif 'FD_pass' in errors %}
+        <p class="error">Пароли не совпадают, повторите попытку</p>
+    {% endif %}
     <form  action="reg" method="POST">
         {% csrf_token %}
         <div class="form-group">
