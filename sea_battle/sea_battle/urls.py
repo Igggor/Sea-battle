@@ -19,7 +19,7 @@ from django.urls import path
 from battle.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', index),
     path('login', login),
     path('reg', registration),
 
