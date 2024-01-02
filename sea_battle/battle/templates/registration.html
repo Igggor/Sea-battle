@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{% static 'styles-registration.css' %}">
+</head>
+<body>
+
+<div class="reg-container">
+    <div class="logo-container">
+        <img class="logo" src="{% static 'imgs/sea.jpg' %}" alt="Логотип">
+    </div>
+    <h2>Регистрация</h2>
+    <form>
+        <div class="form-group">
+            <label for="newUsername">Логин:</label>
+            <input type="text" id="newUsername" name="newUsername" required>
+        </div>
+        <div class="form-group">
+            <label for="newPassword">Пароль:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Повторите пароль:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Зарегистрироваться</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

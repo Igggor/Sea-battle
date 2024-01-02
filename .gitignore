@@ -1,2 +1,8 @@
 venv
 .idea
+sea_battle/sea_battle/__pycache__/
+sea_battle/battle/__pycache__/
+sea_battle/battle/migrations/__pycache__/
+sea_battle/sea_battle/__pycache__/settings.cpython-311.pyc
+sea_battle/sea_battle/__pycache__/urls.cpython-311.pyc
+
