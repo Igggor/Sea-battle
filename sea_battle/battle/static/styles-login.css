@@ -44,7 +44,7 @@ body {
     border-radius: 4px;
 }
 
-.form-group button {
+.main_but {
     background-color: #3498db;
     color: #fff;
     border: none;
@@ -52,6 +52,18 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.double_but {
+    background-color: #fff;
+    border: 1px solid #3498db;
+    color: #3498db;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+}
+
 
 .error{
     color: red;
