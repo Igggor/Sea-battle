@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 
 import battle.forms as forma
+from battle.models import *
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -69,7 +70,8 @@ def registration(request):
             else:
                 if pw == pw_d:
                     user = User.objects.create_user(username=log, password=pw)
-                    user.save()
+                    profile = Profile(user=user, is_admin=False)
+                    profile.save()
                     return redirect('/')
                 else:
                     context["errors"].append("FD_pass")
@@ -78,3 +80,21 @@ def registration(request):
         context["form"] = forma.Registration()
 
     return render(request, 'registration.html', context)
+
+
+@login_required(redirect_field_name="gg", login_url="login")
+def clear_bd(request):
+    data = User.objects.all()
+    for el in data:
+        el.delete()
+    return HttpResponse("Cleared")
+
+
+@login_required(redirect_field_name="gg", login_url="login")
+def check_bd(request):
+    data = User.objects.all()
+    # print(request.user.profile.is_admin) #Проверка, Админ ли пользователь
+    s = ""
+    for el in data:
+        s += f'<p>{str(el.profile.id)}</p>'
+    return HttpResponse(s)
