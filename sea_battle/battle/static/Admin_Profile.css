@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+header {
+    color: #020202;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 75px;
+}
+
+.settings-section{
+    width: 15%;
+}
+
+
+.settings-section, .awards-section {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: #ccc;
+    background-image: url('37431.jpg');
+    background-size: cover;
+}
+
+.user-name {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+.user-description {
+    text-align: center;
+    font-size: 1em;
+    color: #555;
+}
+
+.settings-links {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.settings-links li {
+    margin-bottom: 10px;
+}
+
+.awards-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.award {
+    flex-basis: calc(30% - 20px); /* 40% ширины с учетом отступов */
+    background-color: #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.award-title {
+    font-size: 1.2em;
+}
+
+.award-count {
+    font-size: 0.8em;
+    color: #555;
+}
+
+.logo {
+    width: 15%;
+    height: 15%;
+}
+
+.settings-button {
+    display: block;
+    width: 70%; /* 40% ширины */
+    margin: 10px auto;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.settings-button:hover {
+    background-color: #45a049;
+}
+
+.logout-button:hover {
+    background-color: #ff0000; /* Красный цвет для кнопки выхода из аккаунта */
+    color: white;
+}
+
+
+.profile-section{
+    width: 15%;
+}
+.admin-button{
+    background-color: #5ae53b; /* Красный цвет для кнопки выхода из аккаунта */
+    color: white;  
+}
