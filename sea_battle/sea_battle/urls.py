@@ -23,5 +23,8 @@ urlpatterns = [
     path('login', login, name="login"),
     path('logout', logout),
     path('reg', registration),
+    path('clear', clear_bd),
+    path('ch', check_bd),
+
 
 ]
