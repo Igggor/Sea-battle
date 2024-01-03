@@ -25,6 +25,8 @@ urlpatterns = [
     path('reg', registration),
     path('clear', clear_bd),
     path('ch', check_bd),
+    path('profile', profile),
+    path('adm', amin),
 
 
 ]

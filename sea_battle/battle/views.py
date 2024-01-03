@@ -98,3 +98,26 @@ def check_bd(request):
     for el in data:
         s += f'<p>{str(el.profile.id)}</p>'
     return HttpResponse(s)
+
+
+@login_required(redirect_field_name="gg", login_url="login")
+def profile(request):
+    user = request.user
+    context = {
+        'name': user.username,
+        'admForm': forma.BecomeAdmin(),
+        'nameForm': forma.ChangeLogin(),
+        'passForm': forma.ChangePassword(),
+
+    }
+    if request.user.profile.is_admin:
+        return render(request, "Admin_Profile.html", context)
+    else:
+        return render(request, "User_Profile.html", context)
+
+
+@login_required(redirect_field_name="gg", login_url="login")
+def amin(request):
+    uuu = request.user
+    user = Profile.objects.filter(user=uuu).update(is_admin=not request.user.profile.is_admin)
+    return render(request, "index.html", context={})

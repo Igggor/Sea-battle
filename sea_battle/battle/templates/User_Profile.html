@@ -1,12 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'imgs/sea.png' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="User_Profile.css">
+    <link rel="stylesheet" href="{% static 'User_Profile.css' %}">
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="stylesheet" href="{% static 'styles-navigation.css' %}">
     <title>Профиль Участника</title>
 </head>
 <body>
+    {% include "predicts/navigation.html" %}
+
 
     <header>
         <h1>Профиль Участника</h1>
@@ -15,7 +21,7 @@
     <main>
         <section class="profile-section">
             <div class="profile-image" id="profile-image"></div>
-            <div class="user-name">Имя Участника</div>
+            <div class="user-name">{{ name }}</div>
             <div class="user-description">Описание Участника</div>
         </section>
 
@@ -23,11 +29,13 @@
             <h2 style="
             text-align: center;
         ">Настройки</h2>
-            <button class="settings-button" value="getAdmin">Стать Админом</button>
-            <button class="settings-button" value="changeName">Сменить имя</button>
-            <button class="settings-button" value="changePassword">Сменить пароль</button>
-            <button class="settings-button logout-button" value="logout">Выйти из аккаунта</button>
+            <a class="settings-button"  onclick="admVis()">Стать Админом</a>
+            <a class="settings-button" onclick="nameVis()">Сменить имя</a>
+            <a class="settings-button" onclick="passVis()">Сменить пароль</a>
+            <a class="settings-button logout-button" href="logout">Выйти из аккаунта</a>
         </section>
+        <script src="{% static 'js/profile.js' %}">
+        </script>
 
         <section class="awards-section">
             <h2>Награды</h2>
@@ -75,5 +83,36 @@
             </div>
         </section>
     </main>
+    <footer>
+        {% csrf_token %}
+        <article id="admForm">
+            <form action="adm" method="POST">
+                <h3>Получение прав админа</h3>
+                <p class="quest">Введите токен администратора</p>
+                {{ admForm.token }}
+                <button type="submit" value="adm" class="submit-but">Подтвердить</button>
+            </form>
+        </article>
+
+
+        <article id="nameForm">
+            <form action="change_Name" method="POST">
+                <h3>Смена имени</h3>
+                <p class="quest">Введите новое имя:</p>
+                {{ nameForm.new_login }}
+                <button type="submit" value="name" class="submit-but">Подтвердить</button>
+            </form>
+        </article>
+        <article id="passForm">
+            <form action="PWch" method="POST">
+                <h3>Смена пароля</h3>
+                <p class="quest">Введите новый пароль</p>
+                {{ passForm.password }}
+                <p class="quest">Подтвердите новый пароль</p>
+                {{ passForm.password_double }}
+                <button type="submit" value="PWch" class="submit-but">Подтвердить</button>
+            </form>
+        </article>
+    </footer>
 </body>
 </html>

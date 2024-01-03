@@ -90,6 +90,9 @@ main {
 
 .settings-button {
     display: block;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
     width: 70%; /* 40% ширины */
     margin: 10px auto;
     padding: 8px;
