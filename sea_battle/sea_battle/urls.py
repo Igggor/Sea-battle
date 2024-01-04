@@ -27,6 +27,6 @@ urlpatterns = [
     path('ch', check_bd),
     path('profile', profile),
     path('adm', amin),
-
+    path('change_Name', change_name),
 
 ]

@@ -121,3 +121,32 @@ def amin(request):
     uuu = request.user
     user = Profile.objects.filter(user=uuu).update(is_admin=not request.user.profile.is_admin)
     return render(request, "index.html", context={})
+
+
+def change_name(request):
+    user = request.user
+    context = {
+        'name': user.username,
+        'admForm': forma.BecomeAdmin(),
+        'nameForm': forma.ChangeLogin(),
+        'passForm': forma.ChangePassword(),
+        'mess': None,
+    }
+    if request.method == "POST":
+        f = forma.ChangeLogin(request.POST)
+        context["nameForm"] = f
+        if f.is_valid():
+            new_name = f.data['new_login']
+            uuu = request.user
+            ch_log = User.objects.get(username=uuu.username)
+            ch_log.username = new_name
+            ch_log.save()
+            context['name'] = new_name
+            context['mess'] = "name_changed"
+    if request.user.profile.is_admin:
+        return redirect(profile)
+        # return redirect(request, "Admin_Profile.html", context)
+
+    else:
+        return redirect(profile)
+        # return render(request, "User_Profile.html", context)
