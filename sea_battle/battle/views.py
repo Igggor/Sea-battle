@@ -138,15 +138,46 @@ def change_name(request):
         if f.is_valid():
             new_name = f.data['new_login']
             uuu = request.user
-            ch_log = User.objects.get(username=uuu.username)
-            ch_log.username = new_name
-            ch_log.save()
-            context['name'] = new_name
-            context['mess'] = "name_changed"
+            if User.objects.filter(username=new_name).exists():
+                context["errors"] = "Exists"
+            else:
+                ch_log = User.objects.get(username=uuu.username)
+                ch_log.username = new_name
+                ch_log.save()
+                context['name'] = new_name
+                context['mess'] = "name_changed"
     if request.user.profile.is_admin:
         return redirect(profile)
-        # return redirect(request, "Admin_Profile.html", context)
-
     else:
         return redirect(profile)
-        # return render(request, "User_Profile.html", context)
+
+
+def change_password(request):
+    user = request.user
+    context = {
+        'name': user.username,
+        'admForm': forma.BecomeAdmin(),
+        'nameForm': forma.ChangeLogin(),
+        'passForm': forma.ChangePassword(),
+        'mess': None,
+    }
+    if request.method == "POST":
+        f = forma.ChangePassword(request.POST)
+        context["passForm"] = f
+        if f.is_valid():
+            pw = f.data['password']
+            pw_d = f.data['password_double']
+            if pw == pw_d:
+                uuu = request.user
+                ch_log = User.objects.get(username=uuu.username)
+                print(pw)
+                print(ch_log.password)
+                ch_log.set_password(pw)
+                ch_log.save()
+                context['mess'] = "password_changed"
+            else:
+                print("No")
+    if request.user.profile.is_admin:
+        return redirect(profile)
+    else:
+        return redirect(profile)
