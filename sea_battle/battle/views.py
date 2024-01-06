@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
 
 
 import battle.forms as forma
@@ -96,7 +97,12 @@ def check_bd(request):
     # print(request.user.profile.is_admin) #Проверка, Админ ли пользователь
     s = ""
     for el in data:
-        s += f'<p>{str(el.profile.id)}</p>'
+        s += f'<p>{str(el.profile.is_admin)} {el.username}</p>'
+    s += "___________"
+    data = Profile.objects.all()
+    # print(request.user.profile.is_admin) #Проверка, Админ ли пользователь
+    for el in data:
+        s += f'<p>{str(el.awards)} {el.user.username}</p>'
     return HttpResponse(s)
 
 
@@ -108,19 +114,43 @@ def profile(request):
         'admForm': forma.BecomeAdmin(),
         'nameForm': forma.ChangeLogin(),
         'passForm': forma.ChangePassword(),
+        'awards': None,
 
     }
     if request.user.profile.is_admin:
         return render(request, "Admin_Profile.html", context)
     else:
+        UUU = User.objects.get(username=user.username)
+        awards = UUU.profile.awards.all()
+        context["awards"] = awards
         return render(request, "User_Profile.html", context)
 
 
 @login_required(redirect_field_name="gg", login_url="login")
-def amin(request):
+def admin(request):
+
     uuu = request.user
-    user = Profile.objects.filter(user=uuu).update(is_admin=not request.user.profile.is_admin)
-    return render(request, "index.html", context={})
+    context = {
+        'name': uuu.username,
+        'admForm': forma.BecomeAdmin(),
+        'nameForm': forma.ChangeLogin(),
+        'passForm': forma.ChangePassword(),
+        'mess': None,
+    }
+    if request.method == "POST":
+        f = forma.BecomeAdmin(request.POST)
+        context["admForm"] = f
+        if f.is_valid():
+            token = f.data['token']
+            print(token)
+            if token in ["123", "qwe", "adm", "amin"]:
+                ch_log = Profile.objects.get(user=uuu)
+                ch_log.is_admin = True
+                ch_log.save()
+                print(ch_log.is_admin)
+            else:
+                print("Bad Token and your IQ is very very very very very very very very LOW")
+    return redirect(profile)
 
 
 def change_name(request):
@@ -181,3 +211,15 @@ def change_password(request):
         return redirect(profile)
     else:
         return redirect(profile)
+
+
+def add_award(request):
+    context = {}
+    user = Profile.objects.get(user=request.user)
+    awa = Award(name="Имя награды", description="Описание награды")
+    awa.save()
+    act = user.awards.add(awa)
+    user.save()
+    print(user.awards.all())
+    return HttpResponse("Award added")
+

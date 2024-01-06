@@ -21,10 +21,17 @@ main {
 }
 
 
-.settings-section, .awards-section {
+.settings-section{
     background-color: #fff;
     padding: 10px;
     border-radius: 8px;
+}
+
+.awards-section{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    padding-left: 40px;
 }
 
 .profile-image {

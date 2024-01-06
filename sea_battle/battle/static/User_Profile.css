@@ -21,12 +21,18 @@ main {
 }
 
 
-.settings-section, .awards-section {
+.settings-section {
+    min-width: 131px;
     background-color: #fff;
     padding: 10px;
     border-radius: 8px;
 }
-
+.awards-section{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 240px;
+}
 .profile-image {
     width: 100px;
     height: 100px;

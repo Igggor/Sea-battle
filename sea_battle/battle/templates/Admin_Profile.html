@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'Admin_Profile.css' %}">
     <link rel="stylesheet" href="{% static 'styles-navigation.css' %}">
-    <script src="{% static 'js/profile.js' %}"></script>>
+    <script src="{% static 'js/profile.js' %}"></script>
     <link rel="stylesheet" href="{% static 'profile.css' %}">
-    <title>Профиль Администратора</title>
+    <title>Профиль {{ name }}</title>
 </head>
 <body>
     {% include "predicts/navigation.html" %}
@@ -39,51 +39,51 @@
             <h2>Игры</h2>
             <div class="awards-block">
                 <div class="award">
-                    <div class="award-title">ХУЙ 1</div>
+                    <div class="award-title">Игра 1</div>
                     <div class="award-count">10</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">ХУЙ 2</div>
+                    <div class="award-title">Игра 2</div>
                     <div class="award-count">5</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">ХУЙ 3</div>
+                    <div class="award-title">Игра 3</div>
                     <div class="award-count">8</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">ХУЙ 4</div>
+                    <div class="award-title">Игра 4</div>
                     <div class="award-count">15</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">ХУЙ 5</div>
+                    <div class="award-title">Игра 5</div>
                     <div class="award-count">3</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">ХУЙ 6</div>
+                    <div class="award-title">Игра 6</div>
                     <div class="award-count">3</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">Награда 7</div>
+                    <div class="award-title">Игра 7</div>
                     <div class="award-count">3</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">Награда 8</div>
+                    <div class="award-title">Игра 8</div>
                     <div class="award-count">3</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">Награда 9</div>
+                    <div class="award-title">Игра 9</div>
                     <div class="award-count">3</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">Награда 10</div>
+                    <div class="award-title">Игра 10</div>
                     <div class="award-count">3</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">Награда 11</div>
+                    <div class="award-title">Игра 11</div>
                     <div class="award-count">3</div>
                 </div>
                 <div class="award">
-                    <div class="award-title">Награда 12</div>
+                    <div class="award-title">Игра 12</div>
                     <div class="award-count">3</div>
                 </div>
             </div>
@@ -91,27 +91,20 @@
     </main>
 
 <footer>
-        {% csrf_token %}
-        <article id="admForm">
-            <form action="adm" method="POST">
-                <h3>Получение прав админа</h3>
-                <p class="quest">Введите токен администратора</p>
-                {{ admForm.token }}
-                <button type="submit" value="adm" class="submit-but">Подтвердить</button>
-            </form>
-        </article>
-
-
         <article id="nameForm">
             <form action="change_Name" method="POST">
+                {% csrf_token %}
                 <h3>Смена имени</h3>
                 <p class="quest">Введите новое имя:</p>
                 {{ nameForm.new_login }}
                 <button type="submit" value="name" class="submit-but">Подтвердить</button>
             </form>
         </article>
-        <article id="passForm">
+
+
+    <article id="passForm">
             <form action="PWch" method="POST">
+                {% csrf_token %}
                 <h3>Смена пароля</h3>
                 <p class="quest">Введите новый пароль</p>
                 {{ passForm.password }}
@@ -120,6 +113,15 @@
                 <button type="submit" value="PWch" class="submit-but">Подтвердить</button>
             </form>
         </article>
-    </footer>
+    <article id="admForm">
+        <form action="adm" method="POST">
+            {% csrf_token %}
+            <h3>Получение прав админа</h3>
+            <p class="quest">Введите токен администратора</p>
+            {{ admForm.token }}
+            <button type="submit" value="adm" class="submit-but">Подтвердить</button>
+        </form>
+    </article>
+</footer>
 </body>
 </html>

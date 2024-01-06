@@ -26,7 +26,8 @@ urlpatterns = [
     path('clear', clear_bd),
     path('ch', check_bd),
     path('profile', profile),
-    path('adm', amin),
+    path('adm', admin),
+    path('award', add_award),
     path('change_Name', change_name),
     path('PWch', change_password),
 

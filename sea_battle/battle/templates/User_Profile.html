@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'User_Profile.css' %}">
     <link rel="stylesheet" href="{% static 'profile.css' %}">
     <link rel="stylesheet" href="{% static 'styles-navigation.css' %}">
-    <title>Профиль Участника</title>
+    <title>Профиль {{ name }}</title>
 </head>
 <body>
     {% include "predicts/navigation.html" %}
@@ -46,46 +46,14 @@
         <section class="awards-section">
             <h2>Награды</h2>
             <div class="awards-block">
-                <div class="award">
-                    <div class="award-title">Награда 1</div>
-                    <div class="award-count">10</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 2</div>
-                    <div class="award-count">5</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 3</div>
-                    <div class="award-count">8</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 4</div>
-                    <div class="award-count">15</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 5</div>
-                    <div class="award-count">3</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 6</div>
-                    <div class="award-count">3</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 7</div>
-                    <div class="award-count">3</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 8</div>
-                    <div class="award-count">3</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 9</div>
-                    <div class="award-count">3</div>
-                </div>
-                <div class="award">
-                    <div class="award-title">Награда 10</div>
-                    <div class="award-count">3</div>
-                </div>
+                {% if awards != None %}
+                    {% for item in awards %}
+                        <div class="award">
+                            <div class="award-title">{{ item.name }}</div>
+                            <div class="award-count">{{ item.description }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </section>
     </main>
